@@ -3,7 +3,7 @@ export function formatPrice(price) {
     style: "currency",
     currency: "USD",
   });
-}
+} 
 
 export const foodItems = [
   {
