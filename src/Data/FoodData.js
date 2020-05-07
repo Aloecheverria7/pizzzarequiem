@@ -3,13 +3,13 @@ export function formatPrice(price) {
     style: "currency",
     currency: "USD",
   });
-} 
+}
 
 export const foodItems = [
   {
     name: "Pizza",
     img: "/img/pizza.jpg",
-    section: "PizzaList",
+    section: "Create to Pizza",
     price: 1,
   },
 
@@ -18,11 +18,11 @@ export const foodItems = [
     img: "/img/pizza.png",
     section: "Pizza",
     price: 2,
-  }, 
+  },
   {
     name: "Pepperoni Pizza",
     img: "/img/pizza2.jpeg",
-    section: "PizzaList",
+    section: "Pizza",
     price: 1.5,
   },
   {
