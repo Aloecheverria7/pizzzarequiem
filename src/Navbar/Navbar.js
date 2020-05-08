@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { pizzaRed } from "../Styles/colors";
 import { Title } from "../Styles/title";
-import IconButton from "@material-ui/core/IconButton";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 const NavbarStyled = styled.div`
   background-color: ${pizzaRed};
@@ -29,9 +27,6 @@ export function Navbar({ carshop }) {
           🍕
         </span>
       </Logo>
-      <IconButton>
-        <AddShoppingCartIcon onClick={() => this.handleClick(carshop)} />
-      </IconButton>
     </NavbarStyled>
   );
 }
