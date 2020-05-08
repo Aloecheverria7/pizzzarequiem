@@ -8,6 +8,12 @@ import {
 import { formatPrice } from "../Data/FoodData";
 import { getPrice } from "../FoodDialog/FoodDialog";
 
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 const OrderStyled = styled.div`
   position: fixed;
   right: 0px;
@@ -54,7 +60,16 @@ const DetailItem = styled.div`
   font-size: 10px;
 `;
 
-export function Order({ orders, setOrders, setOpenFood }) {
+export function Order({ orders, setOrders, setOpenFood, AlertDialog }) {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
@@ -130,7 +145,61 @@ export function Order({ orders, setOrders, setOpenFood }) {
         </OrderContent>
       )}
       <DialogFooter>
-        <ConfirmButton onClick={() => {}}>Checkout</ConfirmButton>
+        <div>
+          <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+            Buy It Now
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"important to read before continuing"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to proceed with your purchase?
+                <br></br>
+                <OrderContent>
+                  {" "}
+                  <OrderContainer> Your Order: </OrderContainer>{" "}
+                  <OrderContainer>
+                    <OrderItem>
+                      <div />
+                      <div>Sub-Total</div>
+                      <div>{formatPrice(subtotal)}</div>
+                    </OrderItem>
+                    <OrderItem>
+                      <div />
+                      <div>Tax</div>
+                      <div>{formatPrice(tax)}</div>
+                    </OrderItem>
+                    <OrderItem>
+                      <div />
+                      <div>Delivery</div>
+                      <div>{formatPrice(Delivery)}</div>
+                    </OrderItem>
+                    <OrderItem>
+                      <div />
+                      <div>Total</div>
+                      <div>{formatPrice(total)}</div>
+                    </OrderItem>
+                  </OrderContainer>
+                </OrderContent>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="secondary">
+                NO
+              </Button>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       </DialogFooter>
     </OrderStyled>
   );
