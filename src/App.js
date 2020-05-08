@@ -21,7 +21,7 @@ function App() {
       <FoodDialog {...openFood} {...orders} />
       <Navbar />
       <Order {...orders} {...openFood} />
-      <Banner />
+      <Banner/>
       <Menu {...openFood} />
     </>
   );

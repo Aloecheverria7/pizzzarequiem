@@ -13,6 +13,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Grid  from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import {AlertDialog} from "../FoodDialog/AlertDialog"
+import { Checkbox, FormControlLabel } from "@material-ui/core";
+
 
 const OrderStyled = styled.div`
   position: fixed;
@@ -60,10 +65,11 @@ const DetailItem = styled.div`
   font-size: 10px;
 `;
 
-export function Order({ orders, setOrders, setOpenFood, AlertDialog }) {
+export function Order({ orders, setOrders, setOpenFood}) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
+
   };
 
   const handleClose = () => {
@@ -146,7 +152,7 @@ export function Order({ orders, setOrders, setOpenFood, AlertDialog }) {
       )}
       <DialogFooter>
         <div>
-          <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+          <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
             Buy It Now
           </Button>
           <Dialog
@@ -155,13 +161,56 @@ export function Order({ orders, setOrders, setOpenFood, AlertDialog }) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
+            
             <DialogTitle id="alert-dialog-title">
               {"important to read before continuing"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Are you sure you want to proceed with your purchase?
-                <br></br>
+                Insert your personal data
+                <br>
+                </br>
+                <Grid container spacing={3}>
+               <Grid item xs={12} sm={6}>
+               
+                <TextField
+                 required
+                 id= "firstName"
+                 name="firstName"
+                 label="FirstName"
+                 fullWidth
+                 autoComplete/>
+             </Grid>
+             <Grid item xs={12} sm={6}>
+             <TextField
+                 required
+                 id= "lastName"
+                 name="lastName"
+                 label="LastName"
+                 fullWidth
+                 autoComplete/>
+             </Grid>
+             <Grid item xs={12} sm={6}>
+             <TextField
+                 required
+                 id= "address1"
+                 name="address1"
+                 label="Address line 1"
+                 fullWidth
+                 autoComplete="billing address-line1"/>
+             </Grid>
+             <Grid item xs={12} sm={6}>
+             <TextField
+                 required
+                 id= "numberphone"
+                 name="numberphone"
+                 label="Numberphone"
+                 fullWidth
+                 autoComplete/>
+             </Grid>
+          </Grid>
+          <br></br>
+          Are you sure you want to proceed with your purchase?
                 <OrderContent>
                   {" "}
                   <OrderContainer> Your Order: </OrderContainer>{" "}
@@ -194,13 +243,15 @@ export function Order({ orders, setOrders, setOpenFood, AlertDialog }) {
               <Button onClick={handleClose} color="secondary">
                 NO
               </Button>
-              <Button onClick={handleClose} color="primary" autoFocus>
+
+              <Button variant="outlined" color="primary" onClick={AlertDialog}>
                 Yes
               </Button>
-            </DialogActions>
+              </DialogActions>
           </Dialog>
         </div>
       </DialogFooter>
     </OrderStyled>
+    
   );
 }
