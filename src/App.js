@@ -4,7 +4,7 @@ import { Banner } from "./Banner/Banner";
 import { Menu } from "./Menu/Menu";
 import { FoodDialog } from "./FoodDialog/FoodDialog";
 import { GlobalStyle } from "./Styles/GlobalStyle";
-import { Order } from "./Order/Order";
+import  { Order } from "./Order/Order";
 import { useOpenFood } from "./Hooks/useOpenFood";
 import { useOrders } from "./Hooks/useOrders";
 import { useTitle } from "./Hooks/useTitle";

@@ -15,9 +15,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid  from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import {AlertDialog} from "../FoodDialog/AlertDialog"
-import { Checkbox, FormControlLabel } from "@material-ui/core";
+import { Checkbox, FormControlLabel, Container } from "@material-ui/core";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const OrderStyled = styled.div`
   position: fixed;
@@ -67,12 +71,20 @@ const DetailItem = styled.div`
 
 export function Order({ orders, setOrders, setOpenFood}) {
   const [open, setOpen] = React.useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
+    };
+    const handleClick = () => {
+      setOpen(true);
+    };
 
-  };
+  const handleClose = (event, reason) => {
+    setOpen(false);
+    if (reason === 'clickaway') {
+      return;
+    }
 
-  const handleClose = () => {
     setOpen(false);
   };
 
@@ -87,9 +99,10 @@ export function Order({ orders, setOrders, setOpenFood}) {
     const newOrders = [...orders];
     newOrders.splice(index, 1);
     setOrders(newOrders);
-  };
+  }; 
 
   return (
+    
     <OrderStyled>
       {orders.length === 0 ? (
         <OrderContent>Your order's looking pretty empty.</OrderContent>
@@ -155,7 +168,9 @@ export function Order({ orders, setOrders, setOpenFood}) {
           <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
             Buy It Now
           </Button>
-          <Dialog
+          </div>
+      </DialogFooter>
+      <Dialog
             open={open}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
@@ -242,16 +257,21 @@ export function Order({ orders, setOrders, setOpenFood}) {
             <DialogActions>
               <Button onClick={handleClose} color="secondary">
                 NO
-              </Button>
-
-              <Button variant="outlined" color="primary" onClick={AlertDialog}>
+              </Button>  
+              <Button variant="outlined" color="primary" onClick={handleClick} >
                 Yes
               </Button>
-              </DialogActions>
-          </Dialog>
-        </div>
-      </DialogFooter>
+              </DialogActions> 
+           </Dialog>
+          
     </OrderStyled>
-    
   );
+  
 }
+  /*    <div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+  <Alert onClose={handleClose} severity="success">
+    This is a success message!
+  </Alert>
+</Snackbar>
+</div>*/
